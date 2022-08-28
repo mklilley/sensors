@@ -3,4 +3,7 @@
 A collection of code to read from various sensors.
 
 ## List of sensors
-- [CO2](CO2)
+- [SCD-41](SCD-41)
+  - CO2
+  - Temperature
+  - Humidity
