@@ -1,2 +1,6 @@
-# sensors
-Collection of code to read from various sensors
+# Sensors
+
+A collection of code to read from various sensors.
+
+## List of sensors
+- [CO2](./CO2/README.md)
