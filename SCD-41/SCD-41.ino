@@ -114,6 +114,8 @@ void loop() {
     } else if (co2 == 0) {
         Serial.println("Invalid sample detected, skipping.");
     } else {
+        Serial.print("OK");
+        Serial.print(",");
         Serial.print(co2);
         Serial.print(",");
         Serial.print(temperature);
