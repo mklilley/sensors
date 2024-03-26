@@ -99,6 +99,7 @@ void loop() {
     uint16_t error;
     char errorMessage[256];
 
+    // Output data every 5 seconds 
     delay(5000);
 
     // Read Measurement
