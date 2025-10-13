@@ -2,11 +2,14 @@ import time
 import datetime
 import argparse
 import serial
+import requests
 from pynput import keyboard
 
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
+
+from config import TARGET_URL
 
 # Create an argument parser
 parser = argparse.ArgumentParser(description='Environmental monitoring')
@@ -86,6 +89,19 @@ while not stop_program:
                     u'Temperature': temperature,
                     u'Humidity': humidity
                 }, merge=True)
+              
+            # Store right now data in an additional online datastore
+            payload = {
+                "temperature": temperature,
+                "humidity": humidity,
+                "co2": co2
+            }
+            try:
+                response = requests.put(TARGET_URL, json=payload, timeout=5)
+                response.raise_for_status()
+                print(f"PUT success: {response.status_code}")
+            except requests.RequestException as e:
+                print(f"PUT failed: {e}")
         except Exception as e:
             print("corrupt data")
             print(e)
