@@ -33,12 +33,19 @@ From this folder: `cd SCD-41`
 
 Install OS packages:
 - `sudo apt update`
-- `sudo apt install -y python3 python3-pip python3-venv`
+- `sudo apt install -y python3 python3-venv curl`
 
-Install Python dependencies (venv recommended):
-- `python3 -m venv .venv`
-- `source .venv/bin/activate`
-- `pip install pyserial requests pynput firebase-admin`
+Install `uv` (recommended):
+- `curl -LsSf https://astral.sh/uv/install.sh | sh`
+- Restart your shell (or ensure `~/.local/bin` is on your `PATH`) and confirm: `uv --version`
+- Other install options: https://docs.astral.sh/uv/getting-started/installation/
+
+Install Python dependencies + run (no manual venv activation):
+- `uv sync`
+- `uv run SCD-41.py`
+
+Notes:
+- `uv sync` will create `.venv/` and `uv.lock` in this folder (you do not need to activate the venv manually).
 
 Serial port permissions:
 - Permanent fix: add your user to `dialout` (then log out/in or reboot): `sudo usermod -a -G dialout $USER`
@@ -55,6 +62,6 @@ Serial port permissions:
 If you don’t want to use Firebase or the HTTP PUT, the script will need to be adjusted (right now it imports/initializes both unconditionally).
 
 ### Run
-- Print readings: `python3 SCD-41.py`
-- Save to Firestore: `python3 SCD-41.py -s` or `python3 SCD-41.py -s some-suffix`
+- Print readings: `uv run SCD-41.py`
+- Save to Firestore: `uv run SCD-41.py -s` or `uv run SCD-41.py -s some-suffix`
 - Stop: press `Esc` (keyboard listener) or `Ctrl+C`
