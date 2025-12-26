@@ -1,0 +1,13 @@
+[project]
+name = "scd41-reader"
+version = "0.1.0"
+description = "Read Sensirion SCD-41 measurements from an Arduino over USB serial."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+  "firebase-admin",
+  "pyserial",
+  "pynput",
+  "requests",
+]
+
