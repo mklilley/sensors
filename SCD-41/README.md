@@ -41,7 +41,9 @@ Install Python dependencies (venv recommended):
 - `pip install pyserial requests pynput firebase-admin`
 
 Serial port permissions:
-- Add your user to `dialout` (then log out/in): `sudo usermod -a -G dialout $USER`
+- Permanent fix: add your user to `dialout` (then log out/in or reboot): `sudo usermod -a -G dialout $USER`
+- Verify your user has the group: `groups $USER`
+- Verify the device is owned by `dialout`: `ls -l /dev/ttyACM0` (or your device path)
 - Find which device the Arduino is using: `ls -l /dev/serial/by-id/` (preferred) or `ls /dev/ttyACM* /dev/ttyUSB*`
 - If it’s not `/dev/ttyACM0`, update the port in `SCD-41.py` (look for `serial.Serial(...)`).
 
